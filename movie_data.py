@@ -3,8 +3,6 @@ import json
 import pandas as pd
 from pathlib import Path
 
-
-
 url = "https://api.themoviedb.org/3/authentication"
 
 headers = {
