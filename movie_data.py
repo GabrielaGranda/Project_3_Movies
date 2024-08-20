@@ -13,6 +13,7 @@ response = requests.get(url, headers=headers)
 
 print(response.text)
 
+#listo to append movies
 all_results = []
 
 for i in range (1,100):
