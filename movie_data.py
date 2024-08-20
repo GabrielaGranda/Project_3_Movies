@@ -1,5 +1,10 @@
 import requests
 import json
+<<<<<<< HEAD
+import pandas as pd
+from pathlib import Path
+=======
+>>>>>>> main
 
 
 url = "https://api.themoviedb.org/3/authentication"
@@ -29,4 +34,22 @@ with open('data.json', 'w') as json_file:
 
 print("All pages saved to data.json successfully!")
 
+<<<<<<< HEAD
+df_file = pd.read_json(Path("data.json"))
+df = df_file[["id"]]
 
+all_results_2 = []
+
+for j in df['id']:
+    discovery_2 = f'https://api.themoviedb.org/3/movie/{j}?language=en-US'
+    response_2 = requests.get(discovery_2, headers=headers)
+    data_2 = response_2.json()
+    all_results_2.append(data_2)
+
+with open('data_2.json', 'w') as json_file:
+    json.dump(all_results_2, json_file, indent=4)  # indent=4 for pretty printing
+
+print("All pages saved to data_2.json successfully!")
+=======
+
+>>>>>>> main
