@@ -1,17 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Test</title>
+    <title>Movie Dashboard</title>
+    <!-- Link to External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Link to D3 Library -->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
 </head>
+
 <body>
 
-    <!-- Include config.js first  pending --> 
-    <script src="config.js"></script>
+    <!-- Dashboard Title -->
+    <div class="dashboard-title">
+        <h1>The Movie Dashboard</h1>
+    </div>
 
-    <!-- Include your main JavaScript file -->
-    <script src="movie_test.js"></script>
+    <!-- Combined Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Top 10 Dropdown and Bar Charts -->
+        <div class="card">
+            <div class="dropdown-container">
+                <select id="topBottomSelect" class="dropdown-select">
+                    <option value="top">Top 10</option>
+                    <option value="bottom">Bottom 10</option>
+                </select>
+            </div>
+            <h3 id="revenue-title">Top 10 Movies by Box Office Revenue</h3>
+            <div id="revenue-bar"></div>
+        </div>
+
+        <div class="card">
+            <h3 id="popularity-title">Top 10 Popular Movies</h3>
+            <div id="popularity-bar"></div>
+        </div>
+        <div class="card">
+            <h3 id="budget-title">Top 10 Budgeted Movies</h3>
+            <div id="budget-bar"></div>
+        </div>
+        <div class="card">
+            <h3 id="vote-title">Top 10 Rated Movies of All Time</h3>
+            <div id="vote-bar"></div>
+        </div>
+
+        <!-- Scatterplot Dropdown and Charts -->
+        <div class="card">
+            <div class="dropdown-container">
+                <select id="top30Select" class="dropdown-select">
+                    <option value="vote_average">Top 30 by Vote Average</option>
+                    <option value="revenue">Top 30 by Revenue</option>
+                    <option value="budget">Top 30 by Budget</option>
+                </select>
+            </div>
+            <h3 id="scatter-vote-title">Correlation Between Vote Average and Box Office Revenue</h3>
+            <div id="scatter-vote-revenue"></div>
+        </div>
+
+        <div class="card">
+            <h3 id="scatter-revenue-title">Correlation Between Budget and Box Office Revenue</h3>
+            <div id="scatter-revenue-budget"></div>
+        </div>
+    </div>
+
+    <!-- Link to External JavaScript -->
+    <script src="logic1.js"></script>
 </body>
-</html>
 
+</html>
