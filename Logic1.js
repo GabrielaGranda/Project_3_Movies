@@ -305,7 +305,7 @@ function moveTooltip(event) {
 function hideTooltip(event) {
     d3.select('.tooltip')
         .transition()
-        .duration(0)
+        .duration(500)
         .style('opacity', 0)
         .style('left', '-9999px') // Move it off-screen
         .style('top', '-9999px');
