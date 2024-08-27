@@ -24,7 +24,7 @@
     gap: 20px;
     padding: 40px;
     background-color: #d9d1db;
-    max-width: 1200px;
+    max-width: 1300px;
     margin: auto;
 }
 
@@ -95,7 +95,7 @@
 }
 
 /* Responsive Layout */
-@media (max-width: 768px) {
+@media (max-width: 770px) {
     .dashboard-container {
         grid-template-columns: 1fr; /* Stack cards in a single column for smaller screens */
     }
