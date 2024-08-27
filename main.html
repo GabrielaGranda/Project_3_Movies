@@ -1,17 +1,222 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movie Test</title>
+    <title>Movie Dashboard</title>
+    <!-- Link to External CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Link to D3 Library -->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> <!-- Plotly Library -->
+
+    <!-- MENU -->
+    <nav id="menu">
+        <a id="home" href="#header">Home</a>
+        <a id="pop-country" href="#">Genre Popularity</a>
+        <a id="pop-year" href="#">Popularity over Year</a>
+        <a id="graphs" href="#">Dashboard</a>
+        <a id="revenue" href="#">Revenue</a>
+        <div class="animation start-home"></div>
+    </nav>
+    <!-- MENU ENDS -->
+    <style>
+        /* Menu Styles */
+        nav {
+            margin: 0 auto;
+            position: relative;
+            width: 100%;
+            height: 5.5%;
+            background-color: #34495e;
+            border-radius: 0px;
+            font-size: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        nav a {
+            line-height: 50px;
+            height: 100%;
+            font-size: 15px;
+            display: inline-block;
+            position: pointer;
+            z-index: 1;
+            text-decoration: none;
+            text-transform: uppercase;
+            text-align: center;
+            color: white;
+            cursor: pointer;
+            padding: 0px;
+        }
+
+        nav .animation {
+            position: absolute;
+            height: 100%;
+            top: 0;
+            z-index: 0;
+            transition: all .4s ease;
+            border-radius: 0px;
+        }
+
+        a:nth-child(1) { width: 20%; }
+        a:nth-child(2) { width: 20%; }
+        a:nth-child(3) { width: 20%; }
+        a:nth-child(4) { width: 20%; }
+        a:nth-child(5) { width: 20%; }
+
+        nav .start-home, a:nth-child(1):hover~.animation {
+            width: 20%;
+            left: 0%;
+            background-color: #1abc9c;
+        }
+
+        nav .start-migue, a:nth-child(2):hover~.animation {
+            width: 20%;
+            left: 20%;
+            background-color: #e74c3c;
+        }
+
+        nav .start-janvhi, a:nth-child(3):hover~.animation {
+            width: 20%;
+            left: 40%;
+            background-color: #3498db;
+        }
+
+        nav .start-santi, a:nth-child(4):hover~.animation {
+            width: 20%;
+            left: 60%;
+            background-color: #9b59b6;
+        }
+
+        nav .start-gabriela, a:nth-child(5):hover~.animation {
+            width: 20%;
+            left: 80%;
+            background-color: #aab659;
+        }
+
+        body {
+            font-size: 12px;
+            font-family: sans-serif;
+            background: #dfe7ef;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 40px 0;
+            font-size: 30px;
+            color: #ecf0f1;
+            font-family: 'Cherry Swash', cursive;
+        }
+
+    </style>
 </head>
+
 <body>
+<section id="graph">
+    <!-- Dashboard Title -->
+    <div class="dashboard-title">
+        <h1>The Movie Dashboard</h1>
+    </div>
 
-    <!-- Include config.js first  pending --> 
-    <script src="config.js"></script>
+    <!-- Combined Dashboard Container -->
+    <div class="dashboard-container">
+        <!-- Top 10 Dropdown and Bar Charts -->
+        <div class="card">
+            <div class="dropdown-container">
+                <select id="topBottomSelect" class="dropdown-select">
+                    <option value="top">Top 10</option>
+                    <option value="bottom">Bottom 10</option>
+                </select>
+            </div>
+            <h3 id="revenue-title">Top 10 Movies by Box Office Revenue</h3>
+            <div id="revenue-bar"></div>
+        </div>
 
-    <!-- Include your main JavaScript file -->
-    <script src="movie_test.js"></script>
+        <div class="card">
+            <h3 id="popularity-title">Top 10 Popular Movies</h3>
+            <div id="popularity-bar"></div>
+        </div>
+        <div class="card">
+            <h3 id="budget-title">Top 10 Budgeted Movies</h3>
+            <div id="budget-bar"></div>
+        </div>
+        <div class="card">
+            <h3 id="vote-title">Top 10 Rated Movies of All Time</h3>
+            <div id="vote-bar"></div>
+        </div>
+
+        <!-- Scatterplot Dropdown and Charts -->
+        <div class="card">
+            <div class="dropdown-container">
+                <select id="top30Select" class="dropdown-select">
+                    <option value="vote_average">Top 30 by Vote Average</option>
+                    <option value="revenue">Top 30 by Revenue</option>
+                    <option value="budget">Top 30 by Budget</option>
+                </select>
+            </div>
+            <h3 id="scatter-vote-title">Correlation Between Vote Average and Box Office Revenue</h3>
+            <div id="scatter-vote-revenue"></div>
+        </div>
+
+        <div class="card">
+            <h3 id="scatter-revenue-title">Correlation Between Budget and Box Office Revenue</h3>
+            <div id="scatter-revenue-budget"></div>
+        </div>
+    </div>
+</section>
+     <!-- Element for Plotly chart -->
+     <div id="bubble"></div>
+     <div id="info-box"></div>
+ 
+     <!-- Your JS files -->
+     <script src="Profit.js"></script>
+     <script src="logic1.js"></script>
+ 
+     <script>
+         document.addEventListener('DOMContentLoaded', function() {
+             const revenueLink = document.getElementById('revenue');
+             const popyearLink = document.getElementById('pop-year');
+             const popcountryLink = document.getElementById('pop-country');
+             const homeLink = document.getElementById('home');
+             const graphsLink = document.getElementById('graphs');
+             const revenueSection = document.getElementById('bubble');
+             const graphSection = document.getElementById('graph');
+ 
+             // Update href for the "Revenue" link
+             revenueLink.href = 'javascript:Gabinit();';
+             popyearLink.href = 'genre_popularity.html';
+             popcountryLink.href = 'heatmap_genres_interactive_with_hover.html';
+             homeLink.href = 'index.html';
+             graphsLink.href = 'main.html';
+ 
+             // Add click event listener to hide the header
+             revenueLink.addEventListener('click', function() {
+                 revenueSection.style.display = 'block';
+                 graphSection.style.display = 'none'
+                
+             });
+             // Add click event listener to show the header
+             homeLink.addEventListener('click', function() {
+                 revenueSection.style.display = 'none';// Show the header
+            
+             });
+             // Add click event listener to hide the header
+             popyearLink.addEventListener('click', function() {
+                 revenueSection.style.display = 'none';
+             });
+
+             popcountryLink.addEventListener('click', function() {
+                 revenueSection.style.display = 'none';
+                 
+             });
+             graphsLink.addEventListener('click', function() {
+                 revenueSection.style.display = 'none';
+                
+             });
+         });
+     </script>
 </body>
-</html>
 
+</html>
