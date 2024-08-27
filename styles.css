@@ -96,7 +96,7 @@
 }
 
 /* Responsive Layout */
-@media (max-width: 768px) {
+@media (max-width: 770px) {
     .dashboard-container {
         grid-template-columns: 1fr; /* Stack cards in a single column for smaller screens */
     }
