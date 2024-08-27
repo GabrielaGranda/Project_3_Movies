@@ -31,9 +31,8 @@ function Gabinit() {
 
           // Define the layout
           let layout = {
-              autosize: false,
-              width: 1500,
-              height: 600,
+              autosize: true,
+              height: 700,
               title: "How is the revenue behavior over the years?",
               paper_bgcolor: 'rgba(255,255,255,0)',
               plot_bgcolor: 'rgba(255,255,255,0)',
@@ -142,17 +141,7 @@ function Gabinit() {
         });
 
           // Add click event listener
-          Plotly.d3.select('#bubble').on('plotly_click', function(eventData) {
-              if (eventData.points.length > 0) {
-                  const point = eventData.points[0];
-                  const infoBox = document.getElementById('info-box');
-                  infoBox.innerHTML = `
-                      <strong>Title:</strong> ${point.text}<br>
-                      <strong>Year:</strong> ${point.x}<br>
-                      <strong>Revenue:</strong> $${point.y.toFixed(2)}
-                  `;
-              }
-          });
+
       });
 }
 

@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Movies</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> <!-- Plotly Library -->
+    <script src="https://d3js.org/d3.v6.min.js"></script>
 
     <!-- WEB FONTS -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:100,300,100italic,400,300italic' rel='stylesheet' type='text/css'>
@@ -25,8 +26,8 @@
         nav {
             margin: 0 auto;
             position: relative;
-            width: 1470px;
-            height: 55px;
+            width: 100%;
+            height: 5.5%;
             background-color: #34495e;
             border-radius: 0px;
             font-size: 0;
@@ -59,39 +60,39 @@
             border-radius: 8px;
         }
 
-        a:nth-child(1) { width: 290px; }
-        a:nth-child(2) { width: 300px; }
-        a:nth-child(3) { width: 300px; }
-        a:nth-child(4) { width: 290px; }
-        a:nth-child(5) { width: 290px; }
+        a:nth-child(1) { width: 20%; }
+        a:nth-child(2) { width: 20%; }
+        a:nth-child(3) { width: 20%; }
+        a:nth-child(4) { width: 20%; }
+        a:nth-child(5) { width: 20%; }
 
         nav .start-home, a:nth-child(1):hover~.animation {
-            width: 290px;
-            left: 0;
+            width: 20%;
+            left: 0%;
             background-color: #1abc9c;
         }
 
         nav .start-migue, a:nth-child(2):hover~.animation {
-            width: 300px;
-            left: 290px;
+            width: 20%;
+            left: 20%;
             background-color: #e74c3c;
         }
 
         nav .start-janvhi, a:nth-child(3):hover~.animation {
-            width: 300px;
-            left: 590px;
+            width: 20%;
+            left: 40%;
             background-color: #3498db;
         }
 
         nav .start-santi, a:nth-child(4):hover~.animation {
-            width: 290px;
-            left: 890px;
+            width: 20%;
+            left: 60%;
             background-color: #9b59b6;
         }
 
         nav .start-gabriela, a:nth-child(5):hover~.animation {
-            width: 290px;
-            left: 1180px;
+            width: 20%;
+            left: 80%;
             background-color: #aab659;
         }
 
@@ -120,20 +121,15 @@
             font-size: 16px;
         }
 
-        span {
-            width: 10px;
-            color: #2BD6B4;
-        }
-
     </style>
 </head>
 <body>
     <!-- MENU -->
-    <nav>
+    <nav id="menu">
         <a id="home" href="#header">Home</a>
-        <a id="pop-country" href="#">Popularity Per Country</a>
-        <a id="pop-year" href="#">Popularity Per Year</a>
-        <a id="graphs" href="#">Graphs</a>
+        <a id="pop-country" href="#">Genre Popularity</a>
+        <a id="pop-year" href="#">Popularity over Year</a>
+        <a id="graphs" href="#">Dashboard</a>
         <a id="revenue" href="#">Revenue</a>
         <div class="animation start-home"></div>
     </nav>
@@ -145,8 +141,9 @@
             <div class="row text-center">
                 <div class="col-md-8">
                     <img class="logo" src="images/logo.png" alt="Logo"/>
-                    <h1 class="white-text">Are you a movies Fan? Welcome to Movies Records</h1>
-                    <h5 class="white-text">Here you will find interesting information regarding the movies around the world!</h5>
+                    <h1 class="white-text">Are you a fan of the movies?</h1>
+                    <h5 class="white-text">Have you ever wondered how popular different movie genres are around the world? Have you ever questioned if the popularity of movies and genres changes throughout the years? Have you wondered how much it costs to make movies? or even if they are a good business or not?</h5>
+                    <h5 class="white-text">Answer these and many other questions here!</h5><h3 class="white-text">Welcome to Movies Records!</h3>
                     <div id="countdown" class="white-text"></div>
                 </div>
             </div>
@@ -168,17 +165,24 @@
 
     <!-- Your JS files -->
     <script src="Profit.js"></script>
+    <script src="logic1.js"></script>
     <script>
         // JavaScript to dynamically change href attributes and hide header
         document.addEventListener('DOMContentLoaded', function() {
             const revenueLink = document.getElementById('revenue');
+            const popyearLink = document.getElementById('pop-year');
+            const popcountryLink = document.getElementById('pop-country');
             const homeLink = document.getElementById('home');
+            const graphsLink = document.getElementById('graphs');
             const revenueSection = document.getElementById('bubble');
             const headerSection = document.getElementById('header');
             
 
             // Update href for the "Revenue" link
             revenueLink.href = 'javascript:Gabinit();';
+            popyearLink.href = 'genre_popularity.html';
+            popcountryLink.href = 'heatmap_genres_interactive_with_hover.html';
+            graphsLink.href = 'main.html';
 
             // Add click event listener to hide the header
             revenueLink.addEventListener('click', function() {
@@ -187,9 +191,25 @@
             });
             // Add click event listener to show the header
             homeLink.addEventListener('click', function() {
-                headerSection.style.display = 'block'; 
+                headerSection.style.display = 'block';
                 revenueSection.style.display = 'none';// Show the header
-        });
+            });
+            // Add click event listener to hide the header
+            popyearLink.addEventListener('click', function() {
+                headerSection.style.display = 'none';
+                revenueSection.style.display = 'none';
+
+            });
+            popcountryLink.addEventListener('click', function() {
+                headerSection.style.display = 'none';
+                revenueSection.style.display = 'none';
+
+            });
+            graphsLink.addEventListener('click', function() {
+                headerSection.style.display = 'none';
+                revenueSection.style.display = 'none';
+
+            });
         });
     </script>
 </body>
